@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import './Header.css';
 import Button from '@material-ui/core/Button';
 import logo from '../../assets/logo.svg';
@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function Header(props) {
   
@@ -46,21 +46,28 @@ TabContainer.propTypes = {
   const [passwordReg,setPasswordReg] = useState("");
   const [registrationSuccess,setRegistrationState] = useState(false);
   const [modalIsOpen, setModalState] = useState(false);
-  const [value, setValue] = useState(0);
+  const [value, setvalue] = useState(0);
   const [loggedIn, setLoggedinState] = useState(sessionStorage.getItem('access-token') == null ? false : true);
 
+  const [usernameReq, setUserNameReq] = useState("dispNone");
+  const [passwordReq, setpasswordReq] = useState("dispNone");
+  const [firstnameReq, setFirstNameReq] = useState("dispNone");
+  const [lastnameReq, setLastNameReq] = useState("dispNone");
+  const [emailReq, setEmailReq] = useState("dispNone");
+  const [mobileReq, setmobileReq] = useState("dispNone");
+  const [passwordRegReq, setpasswordRegReq] = useState("dispNone");
 
   const openModalHandler = () => setModalState(true);
   const closeModalHandler = () => setModalState(false);
   
   const tabChangeHandler = (e, value) => {
-    setValue(value);
+    setvalue(value);
 }
  
 const loginClickHandler = () => {
     
-    username === "" ? setUserName({ username: "dispBlock" }) : setUserName({ username: "dispNone" });
-    password === "" ? setPassword({ password: "dispBlock" }) : setPassword({ password: "dispNone" });
+    username === "" ? setUserNameReq({ usernameReq: "dispBlock" }) : setUserNameReq({ usernameReq: "dispNone" });
+    password === "" ? setpasswordReq({ passwordReq: "dispBlock" }) : setpasswordReq({ passwordReq: "dispNone" });
 
     if (username === "" || password === "") { return }
 
@@ -131,16 +138,13 @@ const loginClickHandler = () => {
 
     }
 
-    const modal = () =>{
-
-    }
 
     const registerClickHandler = () => {
-         email === "" ?  setEmail({ email: "dispBlock" }) :  setEmail({ email: "dispNone" });
-         firstname === "" ?  setFirstName({ firstname: "dispBlock" }) :  setFirstName({ firstname: "dispNone" });
-         lastname === "" ?  setlastName({ lastname: "dispBlock" }) :  setlastName({ lastname: "dispNone" });
-         mobile === "" ?  setMobileNumber({ mobile: "dispBlock" }) :  setMobileNumber({ mobile: "dispNone" });
-         passwordReg === "" ?  setPasswordReg({ password: "dispBlock" }) :  setPasswordReg({ password: "dispNone" });
+         email === "" ?  setEmailReq({ emailReq: "dispBlock" }) :  setEmailReq({ emailReq: "dispNone" });
+         firstname === "" ?  setFirstNameReq({ firstnameReq: "dispBlock" }) :  setFirstNameReq({ firstnameReq: "dispNone" });
+         lastname === "" ?  setLastNameReq({ lastnameReq: "dispBlock" }) :  setLastNameReq({ lastnameReq: "dispNone" });
+         mobile === "" ?  setmobileReq({ mobileReq: "dispBlock" }) :  setmobileReq({ mobileReq: "dispNone" });
+         passwordReg === "" ?  setpasswordRegReq({ passwordRegReq: "dispBlock" }) :  setpasswordRegReq({ passwordRegReq: "dispNone" });
         if ( email === "" ||  firstname === "" ||  lastname === "" ||  mobile === "" ||  passwordReg === "") { return; }
 
         //let that = this;
@@ -179,58 +183,68 @@ const loginClickHandler = () => {
                         <div className='loginButton'>
                             <Button variant="contained" color="default" onClick={logoutHandler}>Logout</Button>
                         </div>}
+
+                    {props.showBookShowButton === "true" && !loggedIn ?
+                        <div className="bookshow-button">
+                            <Button variant="contained" onClick={openModalHandler} color="primary">
+                                BOOK SHOW</Button>
+                        </div> : ""}
+                    {props.showBookShowButton === "true" && loggedIn ?
+                        <div className="bookshow-button">
+                            <Link to={"/bookshow/" + this.props.id}><Button variant="contained" color="primary">
+                                BOOK SHOW</Button></Link>
+                        </div> : ""}
              
-        </header>
-       
+        </header>      
         <Modal
                     ariaHideApp={false}
                     isOpen={modalIsOpen}
                     contentLabel="Login"
                     onRequestClose={closeModalHandler}
                     style={customStyles}>
-                    <Tabs className="tabs" setValue={value} onChange={tabChangeHandler}>
+                    <Tabs className="tabs" value={value} onChange={tabChangeHandler}>
                         <Tab label="Login" />
                         <Tab label="Register" />
                     </Tabs>
                     {value === 0 &&
                         <TabContainer >
                             <FormControl required>
-                                <InputLabel htmlFor="username"> Username </InputLabel>
-                                <Input id="username" type="text" key={username}  value = {username} onChange={inputUsernameChangeHandler} />
-                                <FormHelperText className={username}><span className="red">required</span></FormHelperText>
+                                <InputLabel htmlFor="username">Username</InputLabel>
+                                <Input id="username" type="text" autoFocus value ={username}onChange={inputUsernameChangeHandler} />
+                                <FormHelperText className={usernameReq}><span className="red">required</span></FormHelperText>
                             </FormControl><br /><br />
                             <FormControl required>
                                 <InputLabel htmlFor="password"> Password </InputLabel>
-                                <Input id="password" type="password" key={password}value = {password} onChange={inputPasswordChangeHandler} />
-                                <FormHelperText className={ setPassword}><span className="red">required</span></FormHelperText>
+                                <Input id="password" type="password" onChange={inputPasswordChangeHandler} />
+                                <FormHelperText className={passwordReq}><span className="red">required</span></FormHelperText>
                             </FormControl><br /><br />
                             <Button variant="contained" color="primary" onClick={loginClickHandler}>LOGIN</Button>
                         </TabContainer>}
-                    { value === 1 && <TabContainer>
+                    {value === 1 && <TabContainer>
                         <FormControl required>
                             <InputLabel htmlFor="email">Email</InputLabel>
                             <Input id="email" type="email" value={email} onChange={inputEmailChangeHandler} />
-                            <FormHelperText className={ setEmail}><span className="red">required</span></FormHelperText>
+                            <FormHelperText className={ emailReq}><span className="red">required</span></FormHelperText>
                         </FormControl><br /><br />
                         <FormControl required>
                             <InputLabel htmlFor="firstname">First Name</InputLabel>
                             <Input id="firstname" value={firstname}onChange={ inputFirstnameChangeHandler} />
-                            <FormHelperText className={ setFirstName}><span className="red">required</span></FormHelperText>
+                            <FormHelperText className={ firstnameReq}><span className="red">required</span></FormHelperText>
                         </FormControl><br /><br />
                         <FormControl required>
                             <InputLabel htmlFor="lastname">Last Name</InputLabel>
                             <Input id="lastname" value={lastname}onChange={ inputLastnameChangeHandler} />
-                            <FormHelperText className={ setlastName}><span className="red">required</span></FormHelperText>
+                            <FormHelperText className={ lastnameReq}><span className="red">required</span></FormHelperText>
                         </FormControl><br /><br />
                         <FormControl required>
                             <InputLabel htmlFor="mobile">Mobile Number</InputLabel>
                             <Input id="mobile" value={mobile} type="mobile" onChange={ inputMobileChangeHandler} />
-                            <FormHelperText className={ setMobileNumber}><span className="red">required</span></FormHelperText>
+                            <FormHelperText className={ mobileReq}><span className="red">required</span></FormHelperText>
                         </FormControl><br /><br />
                         <FormControl required aria-describedby="name-helper-text">
                             <InputLabel htmlFor="passwordReg">Password</InputLabel>
                             <Input type="password" id="passwordReg" value= {passwordReg} onChange={ inputPasswordRegChangeHandler} />
-                            <FormHelperText className={ setPassword}><span className="red">required</span></FormHelperText>
+                            <FormHelperText className={ passwordRegReq}><span className="red">required</span></FormHelperText>
                         </FormControl><br /><br />
                         { registrationSuccess === true &&
                             <FormControl>
