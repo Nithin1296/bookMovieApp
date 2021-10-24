@@ -1,5 +1,4 @@
 .header{
-    text-align: center;
     padding: 8px 32px 8px 16px;
     height: 36px;
     background-color:  #222;
@@ -7,12 +6,32 @@
 
 .logo{
     background-color: #ff7f7f;
-    height: 35px;
-    text-align: left;
-    transform: rotate3d();
-    animation: infinite 8s linear;
+    height: 35px;   
+    animation: logo-spin infinite 8s linear;
+    
+}
+
+@keyframes logo-spin{
+    from { transform: scaleX(-1);}
 }
 
 .loginButton{
     float: right;
+}
+
+.tabs{
+    margin-bottom: 20px;
+}
+
+.dispNone{
+    display:none;
+}
+
+.dispBlock {
+    display: block;
+}
+
+.red
+{
+    color: red;
 }
