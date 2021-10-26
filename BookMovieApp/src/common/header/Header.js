@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import {Link} from 'react-router-dom';
 
-function Header(props) {
+export function Header(props) {
   
 const customStyles = {
     content: {
@@ -57,8 +57,8 @@ TabContainer.propTypes = {
   const [mobileReq, setmobileReq] = useState("dispNone");
   const [passwordRegReq, setpasswordRegReq] = useState("dispNone");
 
-  const openModalHandler = () => setModalState(true);
-  const closeModalHandler = () => setModalState(false);
+  const openModalHandler = () => {setModalState(true)};
+  const closeModalHandler = () => {setModalState(false)};
   
   const tabChangeHandler = (e, value) => {
     setvalue(value);
@@ -66,23 +66,20 @@ TabContainer.propTypes = {
  
 const loginClickHandler = () => {
     
-    username === "" ? setUserNameReq({ usernameReq: "dispBlock" }) : setUserNameReq({ usernameReq: "dispNone" });
-    password === "" ? setpasswordReq({ passwordReq: "dispBlock" }) : setpasswordReq({ passwordReq: "dispNone" });
+    username === "" ? setUserNameReq("dispBlock") : setUserNameReq("dispNone" );
+    password === "" ? setpasswordReq("dispBlock" ) : setpasswordReq( "dispNone");
 
     if (username === "" || password === "") { return }
-
-    //let that = this;
     let dataLogin = null
-
     let xhrLogin = new XMLHttpRequest();
     xhrLogin.addEventListener("readystatechange", function () {
-        if (this.readyState === 4) {
+        if (xhrLogin.readyState === 4) {
             console.log(xhrLogin.getResponseHeader('access-token'));
 
-            sessionStorage.setItem('uuid', JSON.parse(this.responseText).id);
+            sessionStorage.setItem('uuid', JSON.parse(xhrLogin.responseText).id);
             sessionStorage.setItem('access-token', xhrLogin.getResponseHeader('access-token'));
 
-            setLoggedinState({ loggedIn: true });
+            setLoggedinState(true);
             closeModalHandler();
         }
     })
@@ -100,8 +97,8 @@ const loginClickHandler = () => {
     console.log(sessionStorage.getItem('access-token'));
     sessionStorage.removeItem('uuid');
     sessionStorage.removeItem('access-token');
-    setLoggedinState({ loggedIn: false })
-
+    setLoggedinState(false);
+   
 }
    
     const inputUsernameChangeHandler = (e) => {
@@ -140,11 +137,11 @@ const loginClickHandler = () => {
 
 
     const registerClickHandler = () => {
-         email === "" ?  setEmailReq({ emailReq: "dispBlock" }) :  setEmailReq({ emailReq: "dispNone" });
-         firstname === "" ?  setFirstNameReq({ firstnameReq: "dispBlock" }) :  setFirstNameReq({ firstnameReq: "dispNone" });
-         lastname === "" ?  setLastNameReq({ lastnameReq: "dispBlock" }) :  setLastNameReq({ lastnameReq: "dispNone" });
-         mobile === "" ?  setmobileReq({ mobileReq: "dispBlock" }) :  setmobileReq({ mobileReq: "dispNone" });
-         passwordReg === "" ?  setpasswordRegReq({ passwordRegReq: "dispBlock" }) :  setpasswordRegReq({ passwordRegReq: "dispNone" });
+         email === "" ?  setEmailReq("dispBlock") :  setEmailReq("dispNone");
+         firstname === "" ?  setFirstNameReq("dispBlock") :  setFirstNameReq( "dispNone");
+         lastname === "" ?  setLastNameReq("dispBlock") :  setLastNameReq("dispNone");
+         mobile === "" ?  setmobileReq("dispBlock") :  setmobileReq("dispNone");
+         passwordReg === "" ?  setpasswordRegReq("dispBlock" ) :  setpasswordRegReq("dispNone");
         if ( email === "" ||  firstname === "" ||  lastname === "" ||  mobile === "" ||  passwordReg === "") { return; }
 
         //let that = this;
@@ -155,15 +152,15 @@ const loginClickHandler = () => {
             "mobile_number":  mobile,
             "password":  passwordReg
         })
-
+       
         let xhrSignup = new XMLHttpRequest();
         xhrSignup.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                console.log(this.responseText);
-                setRegistrationState({ registrationSuccess: true })
+            if (xhrSignup.readyState === 4) {
+                console.log(xhrSignup.responseText);
+                setRegistrationState(true);
             }
         })
-
+      
         xhrSignup.open("POST",  props.baseUrl + "signup");
         xhrSignup.setRequestHeader("Content-Type", "application/json");
         xhrSignup.setRequestHeader("Cache-Control", "no-cache");
@@ -191,7 +188,7 @@ const loginClickHandler = () => {
                         </div> : ""}
                     {props.showBookShowButton === "true" && loggedIn ?
                         <div className="bookshow-button">
-                            <Link to={"/bookshow/" + this.props.id}><Button variant="contained" color="primary">
+                            <Link to={"/bookshow/" + props.id}><Button variant="contained" color="primary">
                                 BOOK SHOW</Button></Link>
                         </div> : ""}
              
@@ -209,8 +206,8 @@ const loginClickHandler = () => {
                     {value === 0 &&
                         <TabContainer >
                             <FormControl required>
-                                <InputLabel htmlFor="username">Username</InputLabel>
-                                <Input id="username" type="text" autoFocus value ={username}onChange={inputUsernameChangeHandler} />
+                                <InputLabel htmlFor="username"> Username </InputLabel>
+                                <Input id="username" type="text" value ={username}onChange={inputUsernameChangeHandler} />
                                 <FormHelperText className={usernameReq}><span className="red">required</span></FormHelperText>
                             </FormControl><br /><br />
                             <FormControl required>
@@ -218,7 +215,9 @@ const loginClickHandler = () => {
                                 <Input id="password" type="password" onChange={inputPasswordChangeHandler} />
                                 <FormHelperText className={passwordReq}><span className="red">required</span></FormHelperText>
                             </FormControl><br /><br />
+                            
                             <Button variant="contained" color="primary" onClick={loginClickHandler}>LOGIN</Button>
+                            
                         </TabContainer>}
                     {value === 1 && <TabContainer>
                         <FormControl required>

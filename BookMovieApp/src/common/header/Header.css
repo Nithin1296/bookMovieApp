@@ -15,7 +15,7 @@
     from { transform: scaleX(-1);}
 }
 
-.loginButton{
+.loginButton, .bookshow-button{
     float: right;
 }
 
@@ -35,3 +35,9 @@
 {
     color: red;
 }
+
+.bookshow-button
+{
+    margin-right:8px;
+}
+
