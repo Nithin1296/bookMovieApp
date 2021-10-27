@@ -56,31 +56,68 @@ class Home extends Component {
         this.state = {
             movieName: "",
             upcomingMovies: [{
-                id: 0,
-                poster_url: "http://image.tmdb.org/t/p/w500//4NUzcKtYPKkfTwKsLjwNt8nRIXV.jpg",
-                movieName: "My Hero Academia: World Heroes' Mission",
-                title: "My Hero Academia: World Heroes' Mission"
-            },{
-                id: 1,
-                poster_url: "https://i.insider.com/5d152f42e06ee11bb36a1af7?width=1000&format=jpeg&auto=webp",
-                movieName: "Spider Man - Home Coming",
-                title: "Spider Man",
-                release_date: "Nov 20, 2021"
-            }],
+        id: 0,
+        poster_url: "http://image.tmdb.org/t/p/w500//4NUzcKtYPKkfTwKsLjwNt8nRIXV.jpg",
+        movieName: "My Hero Academia: World Heroes' Mission",
+        title: "My Hero Academia: World Heroes' Mission"
+    },{
+        id: 1,
+        poster_url: "https://i.insider.com/5d152f42e06ee11bb36a1af7?width=1000&format=jpeg&auto=webp",
+        movieName: "Spider Man - Home Coming",
+        title: "Spider Man",
+        release_date: "Nov 20, 2021"
+    },{
+        id: 2,
+        poster_url: "https://c.ndtvimg.com/2021-02/l57n5o6_salaar_625x300_28_February_21.jpg?downsize=360:*",
+        movieName: "Salaar",
+        title: "Salaar",
+        release_date: "April 14, 2022"
+    },{
+        id: 3,
+        poster_url: "https://cdn.mos.cms.futurecdn.net/GZ7qByagHmrGVqV7VbJf8j-480-80.jpg",
+        movieName: "The Batman",
+        title: "The Batman",
+        release_date: "March 4, 2022"
+    },{
+        id: 4,
+        poster_url: "https://i.insider.com/61259c17de5f560019e8988f?width=700",
+        movieName: "The Matrix Resurrections",
+        title: "The Matrix Resurrections",
+        release_date: "Dec 21, 2021"
+    },{
+        id: 5,
+        poster_url: "https://m.media-amazon.com/images/M/MV5BNmM1NmY4N2QtNmVkOS00MjMyLWI5ZGUtYWYxMDRjY2MzNDdiXkEyXkFqcGdeQXVyMTAwMDAwMA@@._V1_.jpg",
+        movieName: "Avatar 2",
+        title: "Avatar 2",
+        release_date: "Dec 16, 2022"
+    }],
             releasedMovies: [{
-                id: 0,
-                poster_url: "http://image.tmdb.org/t/p/w500//xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg",
-                movieName: "Free Guy",
-                title: "Free Guy",
-                release_date: "Aug 13, 2021"
-            },
-            {
-                id: 1,
-                poster_url: "https://www.imdb.com/title/tt6723592/mediaviewer/rm1748282625/",
-                movieName: "Tenet",
-                title: "Tenet",
-                release_date: "Aug 13, 2021"
-            }],
+        id: 0,
+        poster_url: "http://image.tmdb.org/t/p/w500//xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg",
+        movieName: "Free Guy",
+        title: "Free Guy",
+        release_date: "Aug 13, 2021"
+    },{
+        id: 1,
+        poster_url: "https://musicimage.xboxlive.com/catalog/video.movie.8D6KGWXN35F0/image?locale=en-us&mode=crop&purposes=BoxArt&q=90&h=225&w=150&format=jpg",
+        movieName: "Avenger's Endgame",
+        title: "Avenger's Endgame",
+        release_date: "Aug 20, 2019"
+    },
+    {
+        id: 2,
+        poster_url: "https://upload.wikimedia.org/wikipedia/en/1/14/Tenet_movie_poster.jpg",
+        movieName: "Tenet",
+        title: "Tenet",
+        release_date: "Aug 13, 2021"
+    },
+    {
+        id: 3,
+        poster_url: "https://lwlies.com/wp-content/uploads/2017/02/inception-leonardo-dicaprio-joseph-gordon-levitt-768x539-c-default.jpg",
+        movieName: "Inception",
+        title: "Inception",
+        release_date: "April 2010"
+    }],
             genresList: [{}],
             artistsList: [{}],
             genres: [],
